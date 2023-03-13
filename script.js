@@ -9,35 +9,58 @@ var characters = [" ",";","!","@","#","$","%","&","'","(",")","*","+","=",",","-
 generateBtn.addEventListener("click", writePassword);
 
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+    var fpass = pass(); 
+    var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+    if (fpass) {
+        var fpassword = generatePassword();
+        passwordText.value = fpassword;
+    } else {
+        passwordText.value = "";
+    }
 }
 function generatePassword() {
-
+    var password = "";
+    for (var i = 0; i < length; i++) {
+        var random = Math.floor(Math.random() * finalpassword.length)
+        password = password + finalpassword[random];
+    }
+    return password;
 }
-function passlength() {
+function pass() {
   length = parseInt(prompt("How long do you want your password to be? 8 to 128 characters"))
 
-  if(!length===number || length < 8 || length > 128) {
+  if(isNaN(length) || length < 8 || length > 128) {
     alert("Password must be between 8 and 128 characters and the answer must be in number form.");
     return false;
   }
 
   if (confirm("Does your Password need lowercase letters")) {
     finalpassword = finalpassword.concat(lowercaseletters);
+  } else {
+    lowercaseletters = "";
   }
+
   if(confirm("Does your Password need Uppercase letters?")) {
     finalpassword = finalpassword.concat(uppercaseletters);
+  } else {
+    uppercaseletters = "";
   }
   if(confirm("Does your Password need numbers?")) {
     finalpassword = finalpassword.concat(numbers);
+  } else {
+    numbers = "";
   }
   if(confirm("Does your Password need special characters?")) {
     finalpassword = finalpassword.concat(characters);  
+  } else {
+    characters = "";
   }
-  
+  if(finalpassword == false) {
+    alert("Please choose at least one style of character!")
+    return false
+  }
+  return true;
 }
 
 
