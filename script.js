@@ -1,4 +1,5 @@
 var generateBtn = document.querySelector("#generate");
+var finalpassword = [];
 var length = 8;
 var lowercaseletters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 var uppercaseletters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
@@ -12,8 +13,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-  prompt("password?")
-
 }
 function generatePassword() {
 
@@ -22,9 +21,23 @@ function passlength() {
   length = parseInt(prompt("How long do you want your password to be? 8 to 128 characters"))
 
   if(!length===number || length < 8 || length > 128) {
-    alert("Password must be between 8 and 128 characters and the answer must be in number form.")
+    alert("Password must be between 8 and 128 characters and the answer must be in number form.");
     return false;
   }
+
+  if (confirm("Does your Password need lowercase letters")) {
+    finalpassword = finalpassword.concat(lowercaseletters);
+  }
+  if(confirm("Does your Password need Uppercase letters?")) {
+    finalpassword = finalpassword.concat(uppercaseletters);
+  }
+  if(confirm("Does your Password need numbers?")) {
+    finalpassword = finalpassword.concat(numbers);
+  }
+  if(confirm("Does your Password need special characters?")) {
+    finalpassword = finalpassword.concat(characters);  
+  }
+  
 }
 
 
